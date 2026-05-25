@@ -31,9 +31,13 @@
     "node": ">=10"
   },
   "scripts": {
+    "prepare:ci": "[ -d node_modules ] || npm ci --prefer-offline --silent",
+    "prelint": "npm run prepare:ci",
     "lint": "eslint --ignore-pattern 'test-app/' 'src/**/*.ts'",
-    "test": "jest -c jest.config.mjs --coverage",
+    "prevalidate": "npm run prepare:ci",
     "validate": "tsc --noEmit",
+    "pretest": "npm run prepare:ci",
+    "test": "jest -c jest.config.mjs --coverage",
     "build": "tsup",
     "postbuild": "./post-build.mjs"
   },
