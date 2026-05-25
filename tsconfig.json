@@ -1,28 +1,37 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ES2020",
     "target": "ES2020",
+    "outDir": "build",
+    "lib": ["dom"],
+    "types": [
+      "jest",
+      "node"
+    ],
+    "moduleResolution": "node",
+    "declaration": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
-    "stripInternal": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "noImplicitAny": true,
-    "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictNullChecks": true,
-    "removeComments": false,
-    "noEmit": true,
-    "downlevelIteration": true,
-    "declaration": true,
-    "lib": ["es6"]
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "stripInternal": true
   },
   "include": [
-    "src/**/*.ts",
-    "test/**/*.ts"
+    "src/**/*.ts"
   ],
-  "exclude": ["node_modules", "build"]
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
