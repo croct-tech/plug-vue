@@ -37,9 +37,7 @@ describe('createCroct', () => {
     });
 
     it('should provide the context via injection', () => {
-        const options: CroctPluginOptions = {
-            appId: '00000000-0000-0000-0000-000000000000',
-        };
+        const options: CroctPluginOptions = {appId: '00000000-0000-0000-0000-000000000000'};
 
         let context: {plug: Plug} | undefined;
 
@@ -106,9 +104,7 @@ describe('createCroct', () => {
     });
 
     it('should unplug on unmount', () => {
-        const options: CroctPluginOptions = {
-            appId: '00000000-0000-0000-0000-000000000000',
-        };
+        const options: CroctPluginOptions = {appId: '00000000-0000-0000-0000-000000000000'};
 
         const app = createApp({render: () => null});
 
@@ -126,9 +122,7 @@ describe('createCroct', () => {
     it('should ignore errors on unmount', () => {
         jest.mocked(croct.unplug).mockRejectedValue(new Error('foo'));
 
-        const options: CroctPluginOptions = {
-            appId: '00000000-0000-0000-0000-000000000000',
-        };
+        const options: CroctPluginOptions = {appId: '00000000-0000-0000-0000-000000000000'};
 
         const app = createApp({render: () => null});
 
@@ -181,9 +175,7 @@ describe('createCroct', () => {
     });
 
     it('should skip double install', () => {
-        const options: CroctPluginOptions = {
-            appId: '00000000-0000-0000-0000-000000000000',
-        };
+        const options: CroctPluginOptions = {appId: '00000000-0000-0000-0000-000000000000'};
 
         const plugin = createCroct(options);
 
@@ -197,9 +189,7 @@ describe('createCroct', () => {
     });
 
     it('should fall back to monkey-patching unmount when onUnmount is not available', () => {
-        const options: CroctPluginOptions = {
-            appId: '00000000-0000-0000-0000-000000000000',
-        };
+        const options: CroctPluginOptions = {appId: '00000000-0000-0000-0000-000000000000'};
 
         const app = createApp({render: () => null});
 

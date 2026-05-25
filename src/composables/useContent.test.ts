@@ -52,9 +52,7 @@ describe('useContent (CSR)', () => {
                 version: '1.0',
                 contentSource: 'slot',
             },
-            content: {
-                title: 'foo',
-            },
+            content: {title: 'foo'},
         });
 
         let result: ReturnType<typeof useContent> | undefined;
@@ -189,18 +187,14 @@ describe('useContent (CSR)', () => {
                 version: '1.0',
                 contentSource: 'slot',
             },
-            content: {
-                title: 'foo',
-            },
+            content: {title: 'foo'},
         });
 
         let result: ReturnType<typeof useContent> | undefined;
 
         mountWithCroct(
             () => {
-                result = useContent('home-banner@1', {
-                    cacheKey: uniqueKey(),
-                });
+                result = useContent('home-banner@1', {cacheKey: uniqueKey()});
             },
             {fetch: fetch},
         );
@@ -215,9 +209,7 @@ describe('useContent (CSR)', () => {
     });
 
     it('should use the last result as initial when staleWhileLoading is true', async () => {
-        const fetch = jest.fn().mockResolvedValue({
-            content: {title: 'Loaded'},
-        });
+        const fetch = jest.fn().mockResolvedValue({content: {title: 'Loaded'}});
 
         let result: ReturnType<typeof useContent> | undefined;
 

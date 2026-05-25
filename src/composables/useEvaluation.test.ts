@@ -40,9 +40,7 @@ describe('useEvaluation', () => {
     it('should evaluate a query', async () => {
         const evaluationOptions: EvaluationOptions = {
             timeout: 100,
-            attributes: {
-                foo: 'bar',
-            },
+            attributes: {foo: 'bar'},
         };
 
         const evaluate = jest.fn().mockResolvedValue('foo');

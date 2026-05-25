@@ -64,13 +64,13 @@ describe('useContent typing', () => {
         codePosition: number,
     };
 
-    function assembleCode({code, mapping}: CodeOptions): AssembledCode {
-        const prefix = mapping
+    function assembleCode(options: CodeOptions): AssembledCode {
+        const prefix = options.mapping
             ? header + slotMapping
             : header;
 
         return {
-            code: prefix + code.trim(),
+            code: prefix + options.code.trim(),
             codePosition: prefix.length + 1,
         };
     }

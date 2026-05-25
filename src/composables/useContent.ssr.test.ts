@@ -73,13 +73,9 @@ describe('useContent (SSR)', () => {
         const slotId = 'slot-id';
         const preferredLocale = '';
 
-        jest.mocked(getSlotContent).mockReturnValue({
-            foo: 'bar',
-        });
+        jest.mocked(getSlotContent).mockReturnValue({foo: 'bar'});
 
-        useContent(slotId, {
-            preferredLocale: preferredLocale,
-        });
+        useContent(slotId, {preferredLocale: preferredLocale});
 
         expect(getSlotContent).toHaveBeenCalledWith(slotId, undefined);
     });

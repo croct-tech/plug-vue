@@ -47,16 +47,20 @@ describe('SlotContent', () => {
     it('should render the default slot with content on success', async () => {
         const response = {
             content: {title: 'Hello'},
-            metadata: {version: '1.0', contentSource: 'slot'},
+            metadata: {
+                version: '1.0',
+                contentSource: 'slot',
+            },
         };
 
         const fetch = jest.fn().mockResolvedValue(response);
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
             {
-                default: (props: any) => h('h1', {}, props.content.title),
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
             },
+            {default: (props: any) => h('h1', {}, props.content.title)},
             {fetch: fetch},
         );
 
@@ -69,7 +73,10 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
+            {
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
+            },
             {
                 default: () => h('div', {}, 'content'),
                 loading: () => h('span', {}, 'Loading...'),
@@ -85,7 +92,10 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockRejectedValue(error);
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
+            {
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
+            },
             {
                 default: () => h('div', {}, 'content'),
                 error: (props: any) => h('p', {}, props.error.message),
@@ -102,7 +112,11 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey(), initial: {title: 'Default'}},
+            {
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
+                initial: {title: 'Default'},
+            },
             {
                 default: (props: any) => h('h1', {}, props.content.title),
                 loading: () => h('span', {}, 'Loading...'),
@@ -117,7 +131,11 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockResolvedValue({content: {title: 'Fallback'}});
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey(), fallback: {title: 'Fallback'}},
+            {
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
+                fallback: {title: 'Fallback'},
+            },
             {
                 default: (props: any) => h('h1', {}, props.content.title),
                 error: (props: any) => h('p', {}, props.error.message),
@@ -134,10 +152,11 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
             {
-                default: () => h('div', {}, 'content'),
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
             },
+            {default: () => h('div', {}, 'content')},
             {fetch: fetch},
         );
 
@@ -147,16 +166,20 @@ describe('SlotContent', () => {
     it('should pass metadata to the default slot when available', async () => {
         const response = {
             content: {title: 'Hello'},
-            metadata: {version: '2.0', contentSource: 'slot'},
+            metadata: {
+                version: '2.0',
+                contentSource: 'slot',
+            },
         };
 
         const fetch = jest.fn().mockResolvedValue(response);
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
             {
-                default: (props: any) => h('span', {}, `${props.content.title}-${props.metadata.version}`),
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
             },
+            {default: (props: any) => h('span', {}, `${props.content.title}-${props.metadata.version}`)},
             {fetch: fetch},
         );
 
@@ -169,10 +192,11 @@ describe('SlotContent', () => {
         const fetch = jest.fn().mockResolvedValue({content: {title: 'NoMeta'}});
 
         const wrapper = mountSlotContent(
-            {id: 'hero@1', cacheKey: uniqueKey()},
             {
-                default: (props: any) => h('span', {}, `${props.content.title}-${String(props.metadata)}`),
+                id: 'hero@1',
+                cacheKey: uniqueKey(),
             },
+            {default: (props: any) => h('span', {}, `${props.content.title}-${String(props.metadata)}`)},
             {fetch: fetch},
         );
 

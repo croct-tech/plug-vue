@@ -89,5 +89,9 @@ export function useLoader<R>(optionsGetter: () => CacheOptions<R>): LoaderResult
         },
     );
 
-    return {data: data, isLoading: isLoading, error: error};
+    return {
+        data: data,
+        isLoading: isLoading,
+        error: error,
+    };
 }

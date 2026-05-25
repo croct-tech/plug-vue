@@ -169,5 +169,10 @@ export const useContent: UseContentHook = (
         );
     }
 
-    return {data: data, metadata: metadata, isLoading: isLoading, error: error};
+    return {
+        data: data,
+        metadata: metadata,
+        isLoading: isLoading,
+        error: error,
+    };
 };

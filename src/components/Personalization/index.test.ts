@@ -40,10 +40,11 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockResolvedValue('developer');
 
         const wrapper = mountPersonalization(
-            {query: "user's persona", cacheKey: uniqueKey()},
             {
-                default: (props: any) => h('p', {}, `Hello, ${props.result}!`),
+                query: "user's persona",
+                cacheKey: uniqueKey(),
             },
+            {default: (props: any) => h('p', {}, `Hello, ${props.result}!`)},
             {evaluate: evaluate},
         );
 
@@ -56,7 +57,10 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountPersonalization(
-            {query: "user's name", cacheKey: uniqueKey()},
+            {
+                query: "user's name",
+                cacheKey: uniqueKey(),
+            },
             {
                 default: (props: any) => h('p', {}, props.result),
                 loading: () => h('span', {}, 'Loading...'),
@@ -72,7 +76,10 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockRejectedValue(error);
 
         const wrapper = mountPersonalization(
-            {query: "user's name", cacheKey: uniqueKey()},
+            {
+                query: "user's name",
+                cacheKey: uniqueKey(),
+            },
             {
                 default: (props: any) => h('p', {}, props.result),
                 error: (props: any) => h('p', {}, props.error.message),
@@ -89,7 +96,11 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountPersonalization(
-            {query: "user's name", cacheKey: uniqueKey(), initial: 'visitor'},
+            {
+                query: "user's name",
+                cacheKey: uniqueKey(),
+                initial: 'visitor',
+            },
             {
                 default: (props: any) => h('p', {}, `Hello, ${props.result}!`),
                 loading: () => h('span', {}, 'Loading...'),
@@ -104,7 +115,11 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockRejectedValue(new Error('fail'));
 
         const wrapper = mountPersonalization(
-            {query: "user's name", cacheKey: uniqueKey(), fallback: 'guest'},
+            {
+                query: "user's name",
+                cacheKey: uniqueKey(),
+                fallback: 'guest',
+            },
             {
                 default: (props: any) => h('p', {}, `Hello, ${props.result}!`),
                 error: (props: any) => h('p', {}, props.error.message),
@@ -121,10 +136,11 @@ describe('Personalization', () => {
         const evaluate = jest.fn().mockReturnValue(new Promise(() => {}));
 
         const wrapper = mountPersonalization(
-            {query: "user's name", cacheKey: uniqueKey()},
             {
-                default: (props: any) => h('p', {}, props.result),
+                query: "user's name",
+                cacheKey: uniqueKey(),
             },
+            {default: (props: any) => h('p', {}, props.result)},
             {evaluate: evaluate},
         );
 

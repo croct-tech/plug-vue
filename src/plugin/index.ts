@@ -31,7 +31,10 @@ export function createCroct(options: CroctPluginOptions): Plugin {
                         get: function getProperty(target, property: keyof Plug): any {
                             if (property === 'plug') {
                                 return (overrides: Configuration): void => {
-                                    target.plug({...currentOptions, ...overrides});
+                                    target.plug({
+                                        ...currentOptions,
+                                        ...overrides,
+                                    });
                                 };
                             }
 
