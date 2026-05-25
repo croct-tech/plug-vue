@@ -8,7 +8,7 @@
       "jest",
       "node"
     ],
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "declaration": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
