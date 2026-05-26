@@ -22,20 +22,18 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
-    "./*": {
-      "import": "./*.js",
-      "require": "./*.cjs"
-    }
-  },
-  "engines": {
-    "node": ">=10"
+    ".": "./index.js",
+    "./components": "./components/index.js",
+    "./components/*": "./components/*/index.js",
+    "./composables": "./composables/index.js",
+    "./plugin": "./plugin/index.js",
+    "./*": "./*.js"
   },
   "scripts": {
     "lint": "eslint --ignore-pattern 'test-app/' 'src/**/*.ts'",
     "validate": "tsc --noEmit",
     "test": "jest -c jest.config.mjs --coverage",
-    "build": "tsup",
-    "postbuild": "./post-build.mjs"
+    "build": "tsup"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
@@ -67,10 +65,8 @@
   },
   "files": [
     "**/*.js",
-    "**/*.cjs",
     "**/*.mjs",
     "**/*.ts",
-    "**/*.cts",
     "**/*.map"
   ]
 }
