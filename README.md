@@ -31,7 +31,7 @@ Run this command to install the SDK:
 ```sh
 npm install @croct/plug-vue
 ```
-See our [quick start guide](https://docs.croct.com/reference/sdk/vue/installation) for more details.
+See our [quick start guide](https://docs.croct.com/reference/sdk/vue/integration) for more details.
 
 ## Documentation
 
