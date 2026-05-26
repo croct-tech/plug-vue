@@ -10,5 +10,5 @@ export default defineConfig({
     outDir: 'build',
     splitting: false,
     bundle: false,
-    format: ['cjs', 'esm'],
+    format: ['esm'],
 });
