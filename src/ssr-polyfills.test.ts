@@ -39,7 +39,7 @@ describe('Croct polyfill (CSR)', () => {
 
         unplug.mockRejectedValueOnce(new Error('Unplug failed.'));
 
-        const secondAttempt = croct.unplug();
+        const secondAttempt = croctPolyfill.unplug();
 
         jest.runOnlyPendingTimers();
 
@@ -49,7 +49,7 @@ describe('Croct polyfill (CSR)', () => {
 
         unplug.mockResolvedValueOnce();
 
-        const thirdAttempt = croct.unplug();
+        const thirdAttempt = croctPolyfill.unplug();
 
         jest.runOnlyPendingTimers();
 
