@@ -1,6 +1,7 @@
 import {defineComponent, nextTick, ref} from 'vue';
 import {mount, flushPromises} from '@vue/test-utils';
 import {useLoader} from './useLoader';
+import {Cache} from './Cache';
 
 describe('useLoader', () => {
     const cacheKey = {
@@ -48,6 +49,69 @@ describe('useLoader', () => {
         expect(result!.error.value).toBeNull();
 
         expect(loader).toHaveBeenCalledTimes(1);
+    });
+
+    it('should handle null as a valid result', async () => {
+        const loader = jest.fn().mockResolvedValue(null);
+
+        let result: ReturnType<typeof useLoader> | undefined;
+
+        mount(
+            defineComponent({
+                setup: function () {
+                    result = useLoader(
+                        () => ({
+                            cacheKey: cacheKey.current(),
+                            loader: loader,
+                        }),
+                    );
+
+                    return () => null;
+                },
+            }),
+        );
+
+        await flushPromises();
+
+        expect(result!.data.value).toBeNull();
+        expect(result!.isLoading.value).toBe(false);
+        expect(result!.error.value).toBeNull();
+    });
+
+    it('should initialize with cached null result instead of falling back to initial', () => {
+        const getSpy = jest.spyOn(Cache.prototype, 'get').mockReturnValueOnce({
+            result: null,
+            promise: Promise.resolve(null),
+            dispose: jest.fn(),
+        });
+
+        const fetchSpy = jest.spyOn(Cache.prototype, 'fetch').mockReturnValueOnce({
+            promise: new Promise(() => {}),
+            dispose: jest.fn(),
+        });
+
+        let result: ReturnType<typeof useLoader> | undefined;
+
+        mount(
+            defineComponent({
+                setup: function () {
+                    result = useLoader(
+                        () => ({
+                            cacheKey: cacheKey.current(),
+                            loader: jest.fn(),
+                            initial: 'should-not-be-used',
+                        }),
+                    );
+
+                    return () => null;
+                },
+            }),
+        );
+
+        expect(result!.data.value).toBeNull();
+
+        getSpy.mockRestore();
+        fetchSpy.mockRestore();
     });
 
     it('should set error on failure', async () => {

@@ -21,7 +21,8 @@ export type LoaderResult<R> = {
  */
 export function useLoader<R>(optionsGetter: () => CacheOptions<R>): LoaderResult<R> {
     const options = optionsGetter();
-    const data = shallowRef<R | undefined>(cache.get<R>(options.cacheKey)?.result ?? options.initial);
+    const cached = cache.get<R>(options.cacheKey);
+    const data = shallowRef<R | undefined>(cached?.result !== undefined ? cached.result : options.initial);
     const isLoading = ref(data.value === undefined);
     const error = ref<Error | null>(null);
     let mounted = true;

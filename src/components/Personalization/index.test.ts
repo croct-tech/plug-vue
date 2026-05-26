@@ -53,6 +53,23 @@ describe('Personalization', () => {
         expect(wrapper.html()).toBe('<p>Hello, developer!</p>');
     });
 
+    it('should render the default slot with null result', async () => {
+        const evaluate = jest.fn().mockResolvedValue(null);
+
+        const wrapper = mountPersonalization(
+            {
+                query: "user's persona",
+                cacheKey: uniqueKey(),
+            },
+            {default: (props: any) => h('p', {}, `Result: ${props.result}`)},
+            {evaluate: evaluate},
+        );
+
+        await flushPromises();
+
+        expect(wrapper.html()).toBe('<p>Result: null</p>');
+    });
+
     it('should render the loading slot while loading', () => {
         const evaluate = jest.fn().mockReturnValue(new Promise(() => {}));
 
