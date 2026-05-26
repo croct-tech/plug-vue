@@ -1,0 +1,99 @@
+import {join as pathJoin} from 'path';
+import {create} from 'ts-node';
+
+const tsService = create({
+    cwd: pathJoin(__dirname, '..', '..'),
+    transpileOnly: false,
+});
+
+const testFilename = pathJoin(__dirname, 'test.ts');
+
+describe('useEvaluation typing', () => {
+    const header = `
+        import {useEvaluation} from './useEvaluation';
+    `;
+
+    function compileCode(code: string): void {
+        tsService.compile(header + code, testFilename);
+    }
+
+    function getTypeName(code: string): string {
+        const info = tsService.getTypeInfo(header + code.trim(), testFilename, header.length + 1);
+
+        const match = info.name.match(/^\(alias\) (useEvaluation<.+?>)/s);
+
+        if (match !== null) {
+            return match[1].replace(/\s*\n\s*/g, '');
+        }
+
+        return info.name;
+    }
+
+    it('should define the return type as a JSON value by default', () => {
+        const code = `
+            useEvaluation('x');
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<JsonValue, JsonValue, JsonValue>');
+    });
+
+    it('should allow narrowing the return type', () => {
+        const code = `
+            useEvaluation<string>('x');
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<string, string, string>');
+    });
+
+    it('should include the type of the initial value on the return type', () => {
+        const code = `
+            useEvaluation('x', {initial: undefined});
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<JsonValue, undefined, JsonValue>');
+    });
+
+    it('should include the type of the fallback value on the return type', () => {
+        const code = `
+            useEvaluation('x', {fallback: new Error()});
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<JsonValue, JsonValue, Error>');
+    });
+
+    it('should include the types of both the initial and fallback values on the return type', () => {
+        const code = `
+            useEvaluation('x', {initial: undefined, fallback: new Error()});
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<JsonValue, undefined, Error>');
+    });
+
+    it('should allow specifying the type of the initial and fallback values', () => {
+        const code = `
+            useEvaluation<string, undefined, Error>('x', {initial: undefined, fallback: new Error()});
+        `;
+
+        expect(() => compileCode(code)).not.toThrow();
+
+        expect(getTypeName(code)).toBe('useEvaluation<string, undefined, Error>');
+    });
+
+    it('should require specifying a JSON value as return type', () => {
+        const code = `
+            useEvaluation<undefined>('x');
+        `;
+
+        expect(() => compileCode(code)).toThrow();
+    });
+});

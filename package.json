@@ -1,47 +1,76 @@
 {
-  "name": "@croct/ts-project",
+  "name": "@croct/plug-vue",
   "version": "0.0.0-dev",
-  "description": "A brief description about the project.",
+  "description": "Vue components and composables to plug your Vue applications into Croct.",
   "author": {
     "name": "Croct",
-    "email": "lib+project-ts@croct.com",
-    "url": "https://github.com/croct-tech/project-ts"
+    "url": "https://croct.com",
+    "email": "lib+plug-vue@croct.com"
   },
-  "license": "UNLICENSED",
   "keywords": [
     "croct",
     "personalization",
+    "vue",
     "typescript"
   ],
-  "types": "index.d.ts",
-  "main": "index.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/croct-tech/project-ts.git"
+    "url": "git+https://github.com/croct-tech/plug-vue.git"
   },
-  "bugs": {
-    "url": "https://github.com/croct-tech/project-ts/issues"
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "./*": {
+      "import": "./*.js",
+      "require": "./*.cjs"
+    }
   },
-  "homepage": "https://github.com/croct-tech/project-ts",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "lint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
-    "test": "jest -c jest.config.js --coverage",
+    "lint": "eslint --ignore-pattern 'test-app/' 'src/**/*.ts'",
     "validate": "tsc --noEmit",
-    "build": "tsc -p tsconfig.build.json"
+    "test": "jest -c jest.config.mjs --coverage",
+    "build": "tsup",
+    "postbuild": "./post-build.mjs"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "@croct/plug": "^0.23.0",
+    "@croct/sdk": "^0.22.0"
   },
   "devDependencies": {
-    "@croct/eslint-plugin": "^0.8.0",
-    "@swc/jest": "^0.2.24",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-typescript": "^7.24.7",
+    "@croct/eslint-plugin": "^0.8.3",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^10.0.0",
+    "@types/node": "^24.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@vue/test-utils": "^2.4.6",
+    "esbuild-fix-imports-plugin": "^1.0.19",
+    "eslint": "^9.39.2",
     "jest": "^30.0.0",
-    "jest-extended": "^7.0.0",
-    "ts-node": "^10.8.2",
-    "typescript": "^6.0.0"
+    "jest-environment-jsdom": "^30.0.0",
+    "jest-environment-node": "^30.0.0",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.6.3",
+    "vue": "^3.5.0",
+    "webpack": "^5.94.0"
   },
   "files": [
     "**/*.js",
-    "**/*.ts"
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.ts",
+    "**/*.cts",
+    "**/*.map"
   ]
 }
