@@ -4,8 +4,8 @@ import type {VersionedSlotId} from '@croct/plug/slot';
 import type {JsonObject} from '@croct/plug/sdk/json';
 import {useContent} from '../../composables/useContent';
 
-export const SlotContent = defineComponent({
-    name: 'SlotContent',
+export const Slot = defineComponent({
+    name: 'Slot',
     props: {
         id: {
             type: String as PropType<VersionedSlotId>,

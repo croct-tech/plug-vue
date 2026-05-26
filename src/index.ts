@@ -4,4 +4,4 @@ export type * from '@croct/plug/component';
 export * from './plugin';
 export * from './composables';
 export {Personalization} from './components';
-export {SlotContent} from './components';
+export {Slot} from './components';
