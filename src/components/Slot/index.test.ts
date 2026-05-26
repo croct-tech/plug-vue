@@ -2,7 +2,7 @@ import {h} from 'vue';
 import {mount, flushPromises} from '@vue/test-utils';
 import type {Plug} from '@croct/plug';
 import {CROCT_INJECTION_KEY} from '../../plugin';
-import {SlotContent} from './index';
+import {Slot} from './index';
 
 jest.mock(
     '@croct/content',
@@ -12,18 +12,18 @@ jest.mock(
     }),
 );
 
-describe('SlotContent', () => {
+describe('Slot', () => {
     let keyIndex = 0;
 
     function uniqueKey(): string {
-        return `slot-content-test-${++keyIndex}`;
+        return `slot-test-${++keyIndex}`;
     }
 
     beforeEach(() => {
         jest.resetAllMocks();
     });
 
-    function mountSlotContent(
+    function mountSlot(
         props: Record<string, any>,
         slots: Record<string, any>,
         croct?: Partial<Plug>,
@@ -33,7 +33,7 @@ describe('SlotContent', () => {
             ...croct,
         };
 
-        return mount(SlotContent as any, {
+        return mount(Slot as any, {
             props: props,
             slots: slots,
             global: {
@@ -55,7 +55,7 @@ describe('SlotContent', () => {
 
         const fetch = jest.fn().mockResolvedValue(response);
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -72,7 +72,7 @@ describe('SlotContent', () => {
     it('should render the loading slot while loading', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -91,7 +91,7 @@ describe('SlotContent', () => {
         const error = new Error('Network error');
         const fetch = jest.fn().mockRejectedValue(error);
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -111,7 +111,7 @@ describe('SlotContent', () => {
     it('should render the default slot with initial value while loading', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -130,7 +130,7 @@ describe('SlotContent', () => {
     it('should render the default slot with fallback value on error', async () => {
         const fetch = jest.fn().mockResolvedValue({content: {title: 'Fallback'}});
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -151,7 +151,7 @@ describe('SlotContent', () => {
     it('should render nothing when loading without a loading slot', () => {
         const fetch = jest.fn().mockReturnValue(new Promise(() => {}));
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -174,7 +174,7 @@ describe('SlotContent', () => {
 
         const fetch = jest.fn().mockResolvedValue(response);
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),
@@ -191,7 +191,7 @@ describe('SlotContent', () => {
     it('should render without metadata when not returned', async () => {
         const fetch = jest.fn().mockResolvedValue({content: {title: 'NoMeta'}});
 
-        const wrapper = mountSlotContent(
+        const wrapper = mountSlot(
             {
                 id: 'hero@1',
                 cacheKey: uniqueKey(),

@@ -1,2 +1,2 @@
-export {SlotContent} from './SlotContent';
+export {Slot} from './Slot';
 export {Personalization} from './Personalization';
