@@ -13,7 +13,7 @@
   Bring dynamic, personalized content natively into your applications.
 </p>
 <div align="center">
-    <strong>📘 <a href="https://docs.croct.com/reference/sdk/vue/installation">Quick start &rarr;</a></strong>
+    <strong>📘 <a href="https://docs.croct.com/reference/sdk/vue/integration">Quick start &rarr;</a></strong>
 </div>
 <br/>
 <p align="center">
@@ -35,7 +35,7 @@ See our [quick start guide](https://docs.croct.com/reference/sdk/vue/integration
 
 ## Documentation
 
-Visit our [official documentation](https://docs.croct.com/reference/sdk/vue/installation).
+Visit our [official documentation](https://docs.croct.com/reference/sdk/vue/integration).
 
 ## Support
 
