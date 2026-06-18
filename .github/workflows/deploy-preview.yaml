@@ -34,9 +34,19 @@ jobs:
           cp LICENSE README.md build/
           cd build
           find . -type f -path '*/*\.js.map' -exec sed -i -e "s~../src~src~" {} +
-          sed -i -e "s~\"version\": \"0.0.0-dev\"~\"version\": \"${GITHUB_REF##*/}\"~" package.json
-          sed -i -e "s~\./build~.~" package.json
-          sed -i -e "s~./src~.~" package.json
+
+          tmp=$(mktemp)
+
+          jq --arg version "$GITHUB_REF_NAME" '
+            .version = $version |
+            walk(
+              if type == "string"
+              then gsub("\\./build"; ".") | gsub("\\./src"; ".")
+              else . end
+            )
+          ' package.json > "$tmp"
+
+          mv "$tmp" package.json
 
       - name: Publish preview
         run: npx pkg-pr-new publish --compact --comment=update ./build
