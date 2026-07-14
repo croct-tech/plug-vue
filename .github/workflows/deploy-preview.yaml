@@ -37,9 +37,9 @@ jobs:
 
           tmp=$(mktemp)
 
-          SAFE_VERSION="${GITHUB_REF_NAME//\//-}"
+          PARSED_GITHUB_REF_NAME="${GITHUB_REF_NAME//\//-}"
 
-          jq --arg version "$SAFE_VERSION" '
+          jq --arg version "$PARSED_GITHUB_REF_NAME" '
             .version = $version |
             walk(
               if type == "string"
