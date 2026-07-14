@@ -48,5 +48,10 @@ jobs:
 
           mv "$tmp" package.json
 
+      - name: Pack package
+        run: |-
+          cd build
+          npm pack --pack-destination ..
+
       - name: Publish preview
-        run: npm exec pkg-pr-new publish --compact --comment=update ./build
+        run: npx pkg-pr-new publish --compact --comment=update ./*.tgz

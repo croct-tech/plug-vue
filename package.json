@@ -56,7 +56,6 @@
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
     "jest-environment-node": "^30.0.0",
-    "pkg-pr-new": "^0.0.78",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.2",
     "tsup": "^8.4.0",
