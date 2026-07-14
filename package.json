@@ -39,7 +39,7 @@
     "vue": "^3.3.0"
   },
   "dependencies": {
-    "@croct/plug": "^0.23.0",
+    "@croct/plug": "^0.24.0",
     "@croct/sdk": "^0.22.0"
   },
   "devDependencies": {
