@@ -49,4 +49,4 @@ jobs:
           mv "$tmp" package.json
 
       - name: Publish preview
-        run: npx pkg-pr-new publish --compact --comment=update ./build
+        run: npm exec pkg-pr-new publish --compact --comment=update ./build
